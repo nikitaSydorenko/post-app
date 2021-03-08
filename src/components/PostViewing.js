@@ -1,40 +1,40 @@
 import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import {red} from '@material-ui/core/colors';
-import {Grid, IconButton} from '@material-ui/core';
-import CardActions from '@material-ui/core/CardActions';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
+import {Grid} from '@material-ui/core';
 import {fetchComments} from "../ustils/api/placeholder-api";
-import clsx from "clsx";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: 50,
-        maxWidth: 600,
-        minWidth: 600,
-        minHeight: 400,
-        textAlign: 'center',
-        justifyContent: 'center',
-        alignContent: 'center',
+        minWidth: 1700,
+        height: 800
     },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
+    authorInfoContainer: {
+        textAlign: "left",
+        padding: "5px",
+
     },
-    expandOpen: {
-        transform: 'rotate(180deg)',
+    authorInfo: {
+        color: "white",
+        backgroundColor: "#290929",
+        padding: "40px",
+        borderRadius: "5px"
     },
-    avatar: {
-        backgroundColor: red[500],
+    title: {
+        margin: "1em"
     },
+    comments: {
+        textAlign: "left"
+    },
+    comment: {
+        border: "1px solid #e8e8e8",
+        borderRadius: "5px",
+        margin: "5px",
+        padding: "5px"
+    }
 }));
 
 
@@ -53,46 +53,51 @@ const PostViewing = ({posts, users, match}) => {
         setComments(commentsResponse)
     }, [id])
     const classes = useStyles();
-
+    // {name}
+    // Title: {post.title}
+    // {post.body}
+    // <b>Author name:</b> {name}
+    // <b> Author email: </b>{email}
+    // <b> Author phone:</b> {phone}
     return (
         <Grid container justify='center' alignItems='center'>
             <Card className={classes.root}>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        author info
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <b>author name:</b> {name}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <b> author email: </b>{email}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <b> author phone:</b> {phone}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <b> desc:</b> {post.title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <b> desc:</b> {post.body}
-                    </Typography>
+                        <Typography className={classes.authorInfo} variant="body3" component="h1">
+                            {name}
+                        </Typography>
+                <Typography className={classes.title} variant="body3" color="textPrimary" component="h3">
+                    Title: {post.title}
+                </Typography>
+                <Typography variant="body1" color="textPrimary" component="p">
+                    <b> Description post:</b> <br/>
+                    {post.body}
+                </Typography>
+                <div className={classes.authorInfoContainer}>
+                        <Typography variant="body3" color="textPrimary" component="p">
+                            <b>Author name:</b> {name}
+                        </Typography>
+                        <Typography variant="body3" color="textPrimary" component="p">
+                            <b> Author email: </b>{email}
+                        </Typography>
+                        <Typography variant="body3" color="textPrimary" component="p">
+                            <b> Author phone:</b> {phone}
+                        </Typography>
+                </div>
                     <h4>Comments</h4>
 
 
                     {
                         comments.map(comment => {
                                 return (
-                                    <div>
-                                        <Typography paragraph>
-                                            <b>author comment:</b> {comment.name}
-                                        </Typography>
-                                        <Typography >
+                                    <div className={classes.comments}>
+                                        <Typography className={classes.comment}>
+                                            <b>author comment:</b> {comment.name} <br/>
                                             <b>email: </b>{comment.email}
+                                            <Typography  variant="body2"  component="p">
+                                                <b> comment: </b>{comment.body}
+                                            </Typography>
                                         </Typography>
 
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            <b> comment: </b>{comment.body}
-                                        </Typography>
 
                                     </div>
                                 )
@@ -100,7 +105,7 @@ const PostViewing = ({posts, users, match}) => {
                         )
                     }
 
-                </CardContent>
+
             </Card>
         </Grid>
     )

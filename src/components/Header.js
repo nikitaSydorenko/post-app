@@ -6,17 +6,17 @@ import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { NavLink } from 'react-router-dom';
-import {request} from "../ustils/api/request";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+
     },
     title: {
         flexGrow: 1,
     },
     openPosts: {
-        backgroundColor: "black",
+        backgroundColor: "#290929",
         padding: 10,
         color: "white",
         textDecoration: "none"
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: '#616161'
+            main: '#0b0b17'
         }
     }
 });
@@ -36,7 +36,7 @@ const Header = () => {
     return (
         <div className={classes.root}>
             <ThemeProvider theme={theme}>
-                <AppBar position="static">
+                <AppBar position="static" className={classes.appbar}>
                     <Toolbar>
                         <NavLink className={classes.openPosts} to="/posts">OPEN POSTS</NavLink>
                     </Toolbar>

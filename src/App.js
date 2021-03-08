@@ -17,8 +17,6 @@ function App(props) {
         const postsResponse = await fetchPosts()
         const usersResponse = await fetchUsers()
 
-
-
         for (let user of usersResponse) {
             obj[user.id] = user
         }

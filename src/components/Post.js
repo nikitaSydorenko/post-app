@@ -16,13 +16,17 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         justifyContent: 'center',
         alignContent: 'center',
+
     },
     userName: {
-        backgroundColor: "black",
+        backgroundColor: "#290929",
     },
     linkToPost: {
         color: "white",
         textDecoration: "none"
+    },
+    desc: {
+        marginTop: '2em'
     }
 }));
 
@@ -38,8 +42,8 @@ const Post = ({post, user}) => {
                         <b>TITLE POST</b>
                     </Typography>
                     {post.title}
-                    <Typography variant="body3" color="textPrimary" component="p">
-                        DESCRIPTION POST: <Typography color="textSecondary">{post.body}</Typography>
+                    <Typography className={classes.desc} variant="body3" color="textPrimary" component="p">
+                       <b>DESCRIPTION POST:</b>  <Typography color="textSecondary">{post.body}</Typography>
                     </Typography>
                 </CardContent>
                 <CardContent>
